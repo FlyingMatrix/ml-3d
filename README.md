@@ -1,2 +1,2 @@
-# ml-3d
+# Machine Learning for 3D
 A curated collection of machine learning models, pipelines, and tools designed for 3D data processing and understanding.
