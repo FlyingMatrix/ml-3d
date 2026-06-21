@@ -1,6 +1,6 @@
 # Machine Learning for 3D
 
-A curated collection of machine learning models, pipelines, and tools designed for 3D data processing and understanding.
+A curated collection of machine learning models, pipelines, and tools designed for 3D data generation, processing and understanding.
 
 ### 🚀 Generative 3D Pipelines
 
