@@ -58,4 +58,38 @@ A curated collection of machine learning models, pipelines, and tools designed f
    
    - **Process:** Because 3D Gaussians are "cloud-like" and don't have a solid surface, a density field is extracted from them. The **Marching Cubes** algorithm then processes this 3D grid, creating a solid polygonal mesh topology that can be easily rigged, animated, or imported into game engines.
 
+### 🔮Differentiable Rasterization
+
+In traditional computer graphics, rendering is a one-way street: you take 3D data (triangles, textures, cameras) and convert it into a 2D image of pixels. This process is called **rasterization**. 
+
+However, standard rasterization is **non-differentiable** because it involves discrete steps—like determining exactly which triangle covers a specific pixel. In mathematical terms, this creates a discontinuous step function, making it impossible to calculate derivatives (gradients). 
+
+**Differentiable Rasterization** fixes this limitation. It bridges the gap between traditional computer graphics and modern machine learning/computer vision, which allows us to solve **Inverse Graphics** problems: instead of turning 3D into 2D, we can take a 2D image and figure out the 3D scene that matches it.
+
+- **3D Reconstruction:** You can feed an AI a single 2D photo of an object, and by comparing the AI's rendered guess to the real photo, the system can automatically tweak a 3D mesh until it perfectly matches the photo.
+
+- **Texture and Lighting Estimation:** It can automatically extract the exact texture maps or lighting conditions of a real-world environment just by analyzing video footage.
+
+- **Analysis-by-Synthesis:** It allows neural networks to "understand" the physical 3D world by rendering their own guesses and correcting their mistakes mathematically.
+
+### 🎨 Gaussian Splatting
+
+Gaussian Splatting is a **differentiable rasterization technique**. **Splats** are composed of millions of points, where each point is composed of four parameters:
+
+- **Position**: where it’s located (XYZ)
+- **Covariance**: how it’s stretched (3x3 matrix)
+- **Color**: what color it is (RGB)
+- **Alpha**: how transparent it is (α)
+
+Then, to rasterize a splat, these points are projected into 2D. Then, for every pixel, contribute the contribution of every point. In pseudo code:
+
+```
+splat2d = splat.project_and_sort()
+for point in splat2d:
+    for pixel in image:
+        pixel += compute_contribution(point, pixel)
+```
+
+The contribution of a point diminishes the further it is from the pixel. The points also need to be sorted, since they are blended back-to-front.
+
 
