@@ -42,7 +42,7 @@ A curated collection of machine learning models, pipelines, and tools designed f
 [ Output: Textured 3D Mesh (.obj/.gltf) ]
 ```
 
-### 🧩Detailed Pipeline Breakdown
+### 🧩 Detailed Pipeline Breakdown
 
 1. **Multi-view Diffusion (The Concept Creator):**
    
@@ -58,7 +58,7 @@ A curated collection of machine learning models, pipelines, and tools designed f
    
    - **Process:** Because 3D Gaussians are "cloud-like" and don't have a solid surface, a density field is extracted from them. The **Marching Cubes** algorithm then processes this 3D grid, creating a solid polygonal mesh topology that can be easily rigged, animated, or imported into game engines.
 
-### 🔮Differentiable Rasterization
+### 🔮 Differentiable Rasterization
 
 In traditional computer graphics, rendering is a one-way street: you take 3D data (triangles, textures, cameras) and convert it into a 2D image of pixels. This process is called **rasterization**. 
 
