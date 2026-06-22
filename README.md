@@ -92,4 +92,8 @@ for point in splat2d:
 
 The contribution of a point diminishes the further it is from the pixel. The points also need to be sorted, since they are blended back-to-front.
 
+The [original paper](https://huggingface.co/papers/2308.04079) intializes the points using [Structure-from-Motion](https://en.wikipedia.org/wiki/Structure_from_motion), a traditional algorithm for 3D reconstruction. These points are then rasterized using the tile-based method, and the loss is computed by comparing the rasterized image to the ground truth. Gradient descent is applies to adjust the point parameters (position, covariance, color, alpha). The automated densification and pruning are also used to automatically add and remove points as needed.
+
+
+
 
