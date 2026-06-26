@@ -90,6 +90,26 @@ The contribution of a point diminishes the further it is from the pixel. The poi
 
 The [original paper](https://huggingface.co/papers/2308.04079) intializes the points using [Structure-from-Motion](https://en.wikipedia.org/wiki/Structure_from_motion), a traditional algorithm for 3D reconstruction. These points are then rasterized using the tile-based method, and the loss is computed by comparing the rasterized image to the ground truth. Gradient descent is applies to adjust the point parameters (position, covariance, color, alpha). The automated densification and pruning are also used to automatically add and remove points as needed.
 
+### 🧊 Marching Cubes
 
+Marching Cubes is an algorithm that converts a volumetric representation to a dense mesh.
+
+1. **Divide the Space into Voxels:** Split the 3D space into a grid of voxels (cubic cells). The size of each voxel determines the mesh resolution.
+2. **Sample the Eight Vertex Positions:** For each voxel, sample the density at the eight vertices (corners). Determine if each vertex is inside or outside the surface based on its density.
+3. **Determine the Triangle Configuration:** Each voxel has eight vertices, each with two possible states (inside or outside), yielding 256 possible configurations. Each configuration corresponds to a specific triangulation pattern.
+4. **Generate the Mesh:** To generate the final mesh, the algorithm “marches” through each voxel and applies the corresponding triangle configuration, hence the name “Marching Cubes”.
+
+This process produces a dense, rough mesh that approximates the surface of the volume.
+
+### 🏰 Mesh Generation
+
+[MeshAnything](https://huggingface.co/spaces/Yiwen-ntu/MeshAnything) is a recent research project that converts dense meshes to low-poly meshes using techniques introduced in [MeshGPT](https://huggingface.co/papers/2311.15475).
+
+The main components of MeshAnything are:
+
+1. **VQ-VAE Encoder:** Encodes dense 3D data to a discrete latent representation using a Vector Quantization (VQ) Variational Autoencoder (VAE).
+2. **Autoregressive Transformer Decoder:** Generates the triangles of the mesh using an autoregressive transformer decoder.
+
+More details can be found in the paper [MeshAnything: Artist-Created Mesh Generation with Autoregressive Transformers](https://huggingface.co/papers/2406.10163).
 
 
